@@ -28,6 +28,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
+                                <th scope="col">Thumbnail</th>
                                 <th scope="col">Judul</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -36,10 +37,17 @@
                             @foreach ($posts as $item)
                             <tr>
                                 <th scope="row">{{$item->id}}</th>
+                                @if ($item->gambar)
+                                <th scope="row"><img src="{{ url('img/banner').'/'. $item->gambar }}" class="card-img-top" alt="article" style="max-width:200px"></th>
+                                @endif
                                 <td>{{Str::limit($item->title, 50)}}</td>
                                 <td>
-                                    <a href="#" class="btn btn-danger">Hapus</a>
-                                    <a href="#" class="btn btn-secondary">Edit</a>
+                                    <form action="{{url('/dashboard/'.$item->id)}}" method="POST" class="d-inline" onsubmit="return confirm('Yakin Mau Hapus Data')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit">Hapus</button>
+                                    </form>
+                                    <a href="{{url('/dashboard/'.$item->id.'/edit')}}" class="btn btn-secondary">Edit</a>
                                 </td>
                             </tr>
                             @endforeach

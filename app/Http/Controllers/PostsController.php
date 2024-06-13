@@ -46,11 +46,12 @@ class PostsController extends Controller
             'title' => $request->input('title'),
             'body' => $request->input('body'),
             'slug' => $request->input('slug'),
-            'gambar' => $request->file('gambar'),
+            'gambar' => $gambar_nama,
             'author_id' => Auth::id(),
         ];
 
         Post::create($data);
+        return redirect('/dashboard');
     }
 
     /**
@@ -66,7 +67,8 @@ class PostsController extends Controller
      */
     public function edit(string $id)
     {
-
+        $data = Post::where('id', $id)->first();
+        return view('admin.pages.admin.editpost')->with('data', $data);
     }
 
     /**
@@ -74,9 +76,19 @@ class PostsController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'slug' => 'required',
+        ]);
 
-
-
+        $data = [
+            'title' => $request->input('title'),
+            'body' => $request->input('body'),
+            'slug' => $request->input('slug'),
+        ];
+        Post::where('id', $id)->update($data);
+        return redirect('/dashboard');
     }
 
     /**
@@ -84,6 +96,7 @@ class PostsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Post::where('id', $id)->delete();
+        return redirect('/dashboard');
     }
 }

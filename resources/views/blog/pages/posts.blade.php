@@ -10,7 +10,9 @@
                     @foreach ($posts as $postingan)
                         <div class="col">
                             <div class="card" style="width: 18rem;">
-                                <img src="{{ asset('img/news/img07.jpg') }}" class="card-img-top" alt="article">
+                                @if ($postingan->gambar)
+                                <img src="{{ url('img/banner').'/'. $postingan->gambar }}" class="card-img-top" alt="article">
+                                @endif
                                 <div class="card-body text-start">
                                     <h5 class="card-title">{{ $postingan['title'] }}</h5>
                                     <p>{{$postingan->created_at->diffForHumans()}}</p>
