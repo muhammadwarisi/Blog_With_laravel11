@@ -7,23 +7,26 @@
 
             <div class="container">
                 <div class="row">
-                    @foreach ($posts as $posts)
+                    @foreach ($posts as $postingan)
                         <div class="col">
                             <div class="card" style="width: 18rem;">
                                 <img src="{{ asset('img/news/img07.jpg') }}" class="card-img-top" alt="article">
                                 <div class="card-body text-start">
-                                    <h5 class="card-title">{{ $posts['title'] }}</h5>
-                                    <p class="card-text text-left">{{ Str::limit($posts['body'],50) }}</p>
+                                    <h5 class="card-title">{{ $postingan['title'] }}</h5>
+                                    <p>{{$postingan->created_at->diffForHumans()}}</p>
+                                    <p class="card-text text-left">{{ Str::limit($postingan['body'],50) }}</p>
                                 </div>
                                 <div class="card-body text-start">
-                                    <a href="#" class="card-link text-left">{{ $posts['author'] }}</a>
-                                    <a href="/posts/{{$posts['slug']}}" class="card-link text-right">Read More</a>
+                                    <a href="/authors/{{ $postingan->author->id }}" class="card-link text-left text-decoration-none">{{ $postingan->author->name }}</a>
+                                    <a href="/posts/{{$postingan['slug']}}" class="card-link text-right text-decoration-none">Read More</a>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
+                {{$posts->links()}}
             </div>
+
         </div>
     </div>
 

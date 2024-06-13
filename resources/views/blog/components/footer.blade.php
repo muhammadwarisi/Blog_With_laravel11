@@ -1,4 +1,4 @@
-<div class="container-fluid bg-dark pb-5 fixed-bottom">
+<div class="container-fluid bg-dark pb-5">
     <div class="container text-center tentang mb-3">
       <h2 class="display-6 text-light">Tentang Kami</h2>
     </div>
