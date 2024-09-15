@@ -24,7 +24,9 @@ Route::get('/tentang', function(){
 // });
 
 Route::get('/posts', [BlogController::class, 'index']);
-Route::get('/authors/{user}', [BlogController::class, 'tampil']);
+Route::get('/authors/{user}', function(User $user){
+    return view('blog.pages.posts', ['title' => 'Article by ' . $user->name,'posts'=> $user->posts]);
+});
 
 Route::resources([
     '/dashboard' => PostsController::class,

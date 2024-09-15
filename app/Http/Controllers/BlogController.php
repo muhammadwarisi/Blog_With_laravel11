@@ -10,13 +10,13 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $posts = Post::paginate(12);
+        $posts = Post::with('author')->get();
         return view('blog.pages.posts', ['title' => 'Baca Berita Di Sini', 'posts' =>$posts]);
     }
 
-    public function tampil(User $user)
-    {
-        $user = User::paginate(6);
-        return view('blog.pages.posts', ['title' => 'Article By ' . $user->name,'posts' => $user->posts]);
-    }
+    // public function tampil(User $user)
+    // {
+    //     $postingan = User::paginate(6);
+    //     return view('blog.pages.posts', ['title' => 'Article By ','posts' => $postingan]);
+    // }
 }
